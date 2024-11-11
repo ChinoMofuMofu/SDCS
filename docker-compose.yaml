@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+    server1:
+        image: server_1:1.0
+        ports:
+            - "9527:9527"
+            - "20001:22"
+        user: lth
+        command: >
+            sh -c   "cd ~/cache_server &&
+                     echo \"12345678\" | sudo -S redis-server /etc/redis/redis.conf &&
+                     python3 manage.py runserver 0.0.0.0:9527"
+        container_name: cache-server1
+    server2:
+        image: server_2:1.0
+        ports:
+            - "9528:9528"
+            - "20002:22"
+        user: lth
+        command: >
+            sh -c   "cd ~/cache_server &&
+                     echo \"12345678\" | sudo -S redis-server /etc/redis/redis.conf &&
+                     python3 manage.py runserver 0.0.0.0:9528"
+        container_name: cache-server2
+    server3:
+        image: server_3:1.0
+        ports:
+            - "9529:9529"
+            - "20003:22"
+        user: lth
+        command: >
+            sh -c   "cd ~/cache_server &&
+                     echo \"12345678\" | sudo -S redis-server /etc/redis/redis.conf &&
+                     python3 manage.py runserver 0.0.0.0:9529"
+        container_name: cache-server3
